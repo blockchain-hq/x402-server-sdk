@@ -1,24 +1,42 @@
 {
-  "name": "x402-server-sdk",
+  "name": "n8n-nodes-solana-x402",
   "version": "1.0.0",
-  "description": "",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "build": "tsc",
-    "prepare": "npm run build",
-    "test": "ts-node test-server.ts"
+  "description": "n8n node for Solana x402 payment protocol - Return HTTP 402 Payment Required",
+  "keywords": [
+    "n8n-community-node-package",
+    "n8n",
+    "solana",
+    "x402",
+    "payment",
+    "usdc",
+    "http-402"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/YOUR_USERNAME/n8n-nodes-solana-x402",
+  "author": {
+    "name": "Mahima Thacker"
   },
-  "keywords": [],
-  "author": "Mahima Thacker",
-  "license": "ISC",
-  "type": "commonjs",
-  "dependencies": {
-    "@solana/spl-token": "^0.4.14",
-    "@solana/web3.js": "^1.98.4",
-    "bs58": "^6.0.0",
-    "express": "^5.1.0",
-    "tweetnacl": "^1.0.3"
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && cp -r nodes/**/*.{json,svg} dist/nodes/",
+    "dev": "tsc --watch",
+    "format": "prettier nodes credentials --write",
+    "lint": "eslint nodes credentials package.json",
+    "lintfix": "eslint nodes credentials package.json --fix",
+    "prepublishOnly": "npm run build && npm run lint",
+    "test": "npx @n8n/scan-community-package n8n-nodes-solana-x402"
+  },
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/SolanaX402Api.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/SolanaX402/SolanaX402.node.js"
+    ]
   },
   "devDependencies": {
     "@types/express": "^5.0.5",
